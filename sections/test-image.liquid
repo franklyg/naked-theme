@@ -1,0 +1,23 @@
+<div class="pt-10">
+    <img src={{ section.settings.test_image | img_url: 'medium' }} />
+</div>
+
+{%- schema -%}
+{
+ "name": "Test Section",
+ "class": "index-section",
+ "settings": [
+    {
+        "type": "image_picker",
+        "id": "test_image",
+        "label": "Image"
+    }
+ ],
+ "presets": [
+     {
+         "category": "Images",
+         "name": "Test Section" 
+     }
+ ]
+}
+{%- endschema -%}

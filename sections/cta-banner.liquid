@@ -1,0 +1,101 @@
+{%- assign sec = section.settings -%}
+<style>
+    .cta-banner{
+        background: {{ sec.cta_banner_background }};
+    }
+    .cta-banner-copy{
+        color: {{ sec.cta_text_color }};
+        text-align: center;
+    }
+    .cta-banner-button{
+        background: {{ sec.cta_button_background_color }};
+        color: {{ sec.cta_button_text_color }};
+    }
+</style>
+<section class="cta-banner my-8">
+    <div class="xl:max-w-screen-xl mx-auto flex items-center flex-col py-4">
+        <div class="cta-banner-copy mb-4">   
+            <h3 class="text-3xl">{{ sec.cta_header }}</h3>
+            <p class="text-2xl">{{ sec.cta_supporting_copy }}</p>
+        </div>
+        <a href="{{ sec.cta_button_url }}" class="cta-banner-button p-2">
+            {{ sec.cta_button_text }}
+        </a>
+    </div>
+</section>
+
+{% schema %}
+{   "name": "CTA Banner",
+    "settings": [
+        {
+            "type": "text",
+            "id": "cta_header",
+            "label": "CTA Header",
+            "default": "This is a Call to Action",
+            "info": "This is where you enter copy for this sections title",
+            "placeholder": "This is a Call to Action"
+        },
+        {
+            "type": "textarea",
+            "id": "cta_supporting_copy",
+            "label": "CTA Supporting Copy",
+            "default": "This is supporting text for your CTA",
+            "info": "This is where you enter copy for this sections supporting text",
+            "placeholder": "This is supporting text for your call to action."
+        },
+        {
+            "type": "text",
+            "id": "cta_button_text",
+            "label": "Button Text",
+            "default": "Click Here",
+            "info": "This is where you enter copy for this sections CTA button",
+            "placeholder": "This is a Call to Action"
+        },
+        {
+            "type": "url",
+            "id": "cta_button_url",
+            "label": "Button URL",
+            "default": "/"
+        },
+        {
+            "type": "header",
+            "content": "Colors",
+            "info": "These are the color options for this section"
+        },
+        {
+            "type": "color",
+            "id": "cta_banner_background",
+            "label": "CTA Banner Background",
+            "default": "#242424",
+            "info": "This is where you select the background color for this section"
+        },
+        {
+            "type": "color",
+            "id": "cta_text_color",
+            "label": "CTA Banner Copy Color",
+            "default": "#FFFFFF",
+            "info": "This is where you select the text color for this section"
+        },
+        {
+            "type": "color",
+            "id": "cta_button_background_color",
+            "label": "CTA Button Backgrounf Color",
+            "default": "#FFFFFF",
+            "info": "This is where you select the button background color for this section"
+        },
+        {
+            "type": "color",
+            "id": "cta_button_text_color",
+            "label": "CTA Button Text Color",
+            "default": "#242424",
+            "info": "This is where you select the text color for this section"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Call To Action",
+            "name":"CTA Banner"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,28 @@
+<section>
+    <div>
+        <h1>
+            {{ section.settings.section_title }}
+        </h1>
+    </div>
+</section>
+
+{% schema %}
+{   
+    "name": "Text and Image",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "section_title",
+            "label": "Title",
+            "default": "This is a header",
+            "info": "This is where you enter your title"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Text",
+            "name":"Text and Image"
+        }
+    ]
+}
+{% endschema %}

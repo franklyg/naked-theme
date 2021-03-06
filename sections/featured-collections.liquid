@@ -1,0 +1,49 @@
+<div class="xl:max-w-screen-xl mx-auto py-8">
+    <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
+        {% for block in section.blocks %}
+            {%- assign collection = collections[block.settings.featured_collections] -%}
+            <div class="shadow-md transform transition-all bg-white p-2">
+                <img 
+                    src="{{ collection.image | img_url: 'medium' }}"
+                    alt="{{ collection.title }}"
+                />
+                <a href="{{ collection.url }}" class="p-2 bg-black text-white">
+                    {{ block.settings.button_copy }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Featured Collections",
+    "blocks": [
+        {
+            "type": "Collections",
+            "name": "Quote",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "featured_collections",
+                    "label": "Featured Collection",
+                    "info": "This will show you collections"
+                },
+                {
+                    "type": "text",
+                    "id": "button_copy",
+                    "label": "Collection Button Copy",
+                    "default": "View More",
+                    "info": "This is copy for a button",
+                    "placeholder": "View Moer"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Featured Collections",
+            "name":"Collections"
+        }
+    ]
+}
+{% endschema %}

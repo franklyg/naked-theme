@@ -1,0 +1,43 @@
+{%- assign sec = section.settings -%}
+<style>
+    .simple-copy p{
+        margin-bottom: 1.25rem;
+    }
+</style>
+<article class="simple-copy my-8">
+    <div class="xl:max-w-screen-sm mx-auto">
+        <h2 class="text-3xl mb-4">{{ sec.simple_copy_title }}</h2>
+        <div>
+            {{ sec.simple_copy_richtext }}
+        </div>
+    </div>
+</article>
+
+{% schema %}
+{
+    "name": "Simple Copy",
+    "settings": [
+        {
+            "type": "text",
+            "id": "simple_copy_title",
+            "label": "Simple Copy Title",
+            "default": "This is a Simple Header",
+            "info": "This is where you enter copy for this sections title",
+            "placeholder": "This is a Simple Header"
+        },
+        {
+            "type": "richtext",
+            "id": "simple_copy_richtext",
+            "label": "Simple Copy Richtext",
+            "default": "<p>This is richtext for your Simple Copy</p>",
+            "info": "This is where you enter richtext for this sections title"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Text",
+            "name":"Simple Copy"
+        }
+    ]
+}
+{% endschema %}
