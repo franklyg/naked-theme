@@ -1,4 +1,4 @@
-# Simple Theme
+# Naked Theme
 It's as simple as it sounds. A Shopify theme that is completely barebones. Just static sections built with Tailwind CSS.
 
 ## Liquid Template Rules
