@@ -1,3 +1,5 @@
+{%- comment -%}SIMPLE CTA BANNER SECTION{%- endcomment -%}
+
 {%- assign sec = section.settings -%}
 <style>
     .cta-banner{
@@ -12,7 +14,7 @@
         color: {{ sec.cta_button_text_color }};
     }
 </style>
-<section class="cta-banner my-8">
+<section class="simple-cta-banner cta-banner my-8">
     <div class="xl:max-w-screen-xl mx-auto flex items-center flex-col py-4">
         <div class="cta-banner-copy mb-4">   
             <h3 class="text-3xl">{{ sec.cta_header }}</h3>

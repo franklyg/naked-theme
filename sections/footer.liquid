@@ -1,0 +1,79 @@
+{%- comment -%}SIMPLE FOOTER SECTION{%- endcomment -%}
+
+{%- assign sec = section.settings -%}
+<style>
+    footer{
+        background: {{ sec.footer_background_color }};
+    }
+</style>
+
+{%- comment -%}Columns Class{%- endcomment -%}
+{% case section.blocks.size %}
+  {% when 0 %}
+  {% when 1 %}
+    {% assign column_width = 'grid-cols-1' %}
+  {% when 2 %}
+    {% assign column_width = 'grid-cols-2' %}
+  {% when 3 %}
+    {% assign column_width = 'grid-cols-3' %}
+  {% when 4 %}
+    {% assign column_width = 'grid-cols-4' %}
+  {% when 5 %}
+    {% assign column_width = 'grid-cols-5' %}
+  {% when 6 %}
+    {% assign column_width = 'grid-cols-6' %}
+{% endcase %}
+
+<footer class="footer py-8 mt-8">
+    <div class="grid grid-cols-2">
+        <div>
+            <img 
+                src="{{ sec.footer_logo }}"
+                alt="{{ sec.footer_logo_alt }}"
+            />
+            <div class="grid {{ column_width }}">
+                {%- for block in section.blocks -%}
+                {%- assign footer_links = block.settings.footer_links -%}
+                {%- assign menu = linklists[footer_links].links -%}
+                    <ul>
+                        {%- for item in menu -%}
+                            <a href="{{ item.url }}">{{ item.title }}</a>
+                        {%- endfor -%}
+                    </ul>
+                {%- endfor -%}
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    
+</footer>
+
+{% schema %}
+{
+    "name": "Footer",
+    "settings": [
+        {
+            "type": "color",
+            "id": "footer_background_color",
+            "label": "Footer Background Color",
+            "default": "#242424",
+            "info": "This is where you select the background color for the footer."
+        }
+    ],
+    "blocks":[
+        {
+            "type": "links",
+            "name": "Links",
+            "settings": [
+                {
+                    "type": "link_list",
+                    "id": "footer_links",
+                    "label": "Footer Link"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+{%- comment -%}SIMPLE FOLD SECTION{%- endcomment -%}
+
+{%- assign sec = section.settings -%}
+<section class="fold">
+    <div class="xl:max-w-screen-xl mx-auto h-screen flex column justify-center items-center">
+        <div>
+            <h1 class="text-6xl">{{ sec.fold_header }}</h1>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Fold",
+    "settings": [
+        {
+            "type": "text",
+            "id": "fold_header",
+            "label": "Fold Header",
+            "default": "A Title In The Fold",
+            "info": "This is where you enter copy for this sections title",
+            "placeholder": "Enter your title"
+        },
+        {
+            "type": "textarea",
+            "id": "id",
+            "label": "label",
+            "default": "This is some copy for you",
+            "info": "This is where you enter copy for this sections sub copy",
+            "placeholder": "Enter your sub copy"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Hero",
+            "name": "Fold"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+{%- comment -%}SIMPLE HEADER SECTION{%- endcomment -%}
+{%- assign sec = section.settings -%}
+
+<style>
+    footer{
+        background: {{ sec.footer_background_color }};
+    }
+</style>
+<header class="header shadow-md fixed w-screen bg-white z-50 top-0">
+    <nav class="xl:max-w-screen-xl mx-auto p-4">
+        <div class="grid grid-cols-2 items-center">
+            <a href="/">
+                {%- if sec.logo_image != blank -%}
+                    <img src={{  sec.logo_image | img_url: 'medium' }} alt={{ sec.logo_image_alt }}/>
+                {%- endif -%}
+            </a>
+    
+            {%- assign header_links = sec.header_links -%}
+            {%- assign menu = linklists[header_links].links -%}
+            <div class="justify-self-end">
+                <ul>
+                    {%- for item in menu -%}
+                        <a href="{{ item.url }}" class="px-2">{{ item.title }}</a>
+                    {%- endfor -%}
+                </ul>
+                {% if shop.customer_accounts_enabled %}
+                    {% if customer %}
+                        <a href="/account">account</a>
+                        {{ 'log out'  | customer_logout_link }}
+                    {% else %}
+                        {{ 'log in ' | customer_login_link }}
+                        {{ 'register' | customer_register_link }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
+{% schema %}
+{
+    "name": "Header",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "logo_image",
+            "label": "Logo"
+        },
+        {
+            "type": "text",
+            "id": "logo_image_alt",
+            "label": "Logo Alt",
+            "default": "image",
+            "info": "This is where you enter alt copy for the header",
+            "placeholder": "Enter alt..."
+        },
+        {
+            "type": "color",
+            "id": "header_background_color",
+            "label": "Header Background Color",
+            "default": "#242424",
+            "info": "This is where you select the background color for the footer."
+        },
+        {
+            "type": "link_list",
+            "id": "header_links",
+            "label": "Header Link"
+        }
+    ]
+}
+{% endschema %}

@@ -1,4 +1,6 @@
-<div class="xl:max-w-screen-xl mx-auto py-8">
+{%- comment -%}SIMPLE FEATURED COLLECTIONS SECTION{%- endcomment -%}
+
+<div class="simple-featured-collections xl:max-w-screen-xl mx-auto py-8">
     <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
         {% for block in section.blocks %}
             {%- assign collection = collections[block.settings.featured_collections] -%}
@@ -7,7 +9,7 @@
                     src="{{ collection.image | img_url: 'medium' }}"
                     alt="{{ collection.title }}"
                 />
-                <a href="{{ collection.url }}" class="p-2 bg-black text-white">
+                <a href="{{ collection.url }}" class="p-2 bg-black text-white block text-center">
                     {{ block.settings.button_copy }}
                 </a>
             </div>
