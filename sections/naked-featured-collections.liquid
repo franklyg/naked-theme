@@ -1,10 +1,10 @@
-{%- comment -%}SIMPLE FEATURED COLLECTIONS SECTION{%- endcomment -%}
+{%- comment -%}NAKED FEATURED COLLECTIONS SECTION{%- endcomment -%}
 
 <div class="simple-featured-collections xl:max-w-screen-xl mx-auto py-8">
     <div class="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
         {% for block in section.blocks %}
             {%- assign collection = collections[block.settings.featured_collections] -%}
-            <div class="shadow-md transform transition-all bg-white p-2">
+            <div class="shadow-md transform transition-all p-2" style="background: #fc7c3d;" >
                 <img 
                     src="{{ collection.image | img_url: 'medium' }}"
                     alt="{{ collection.title }}"

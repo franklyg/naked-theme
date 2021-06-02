@@ -1,0 +1,70 @@
+{%- comment -%}NAKED IMAGE TEXT OVERLAY SECTION{%- endcomment -%}
+
+{%- assign sec = section.settings -%}
+<style>
+    .naked-image-text-overlay{
+        background: url({{ sec.background_image  | img_url: 'master' }});
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+    }
+</style>
+<div class="naked-image-text-overlay relative {%if sec.overlay_height == 'inherit'%} py-8 {%- else -%} h-screen {%- endif -%}">
+    <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-hull mx-auto flex flex-col items-center justify-center" style="background-color: rgba(249, 228, 198, 0.5); backdrop-filter: blur(7px);">
+        <h3 class="text-3xl">{{ sec.overlay_title }}</h3>
+        <div>
+            {{ sec.overlay_subtext }}
+        </div>
+    </div>
+</div>
+
+{%- schema -%}
+{
+ "name": "Image Text Overlay",
+ "class": "index-section",
+ "settings": [
+    {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image" 
+    },
+    {
+        "type": "text",
+        "id": "overlay_title",
+        "label": "Overlay Title",
+        "default": "This is the overlay title",
+        "info": "This is where you enter copy for this sections title",
+        "placeholder": "Enter your title..."
+    },
+    {
+        "type": "richtext",
+        "id": "overlay_subtext",
+        "label": "Overlay Sub Text",
+        "default": "<p>Enter your overlay subtext</p>",
+        "info": "This is where you enter copy for this sections richtext"
+    },
+    {
+        "type": "select",
+        "id": "overlay_height",
+        "label": "Overlay Section Height",
+        "options": [
+            {
+                "value": "full",
+                "label": "Full"
+            },
+            {
+                "value": "inherit",
+                "label": "inherit"
+            }
+        ],
+        "default": "inherit"
+    }
+ ],
+ "presets": [
+     {
+         "category": "Text",
+         "name": "Image Text Overlay" 
+     }
+ ]
+}
+{%- endschema -%}

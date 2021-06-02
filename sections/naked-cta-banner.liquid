@@ -1,5 +1,10 @@
-{%- comment -%}SIMPLE CTA BANNER SECTION{%- endcomment -%}
+{%- comment -%}NAKED CTA BANNER SECTION{%- endcomment -%}
 
+<!-- 
+    TODO:  
+        * Set up alignment options
+        * Buttoin hover states
+-->
 {%- assign sec = section.settings -%}
 <style>
     .cta-banner{
@@ -14,16 +19,51 @@
         color: {{ sec.cta_button_text_color }};
     }
 </style>
+
 <section class="simple-cta-banner cta-banner my-8">
-    <div class="xl:max-w-screen-xl mx-auto flex items-center flex-col py-4">
-        <div class="cta-banner-copy mb-4">   
-            <h3 class="text-3xl">{{ sec.cta_header }}</h3>
-            <p class="text-2xl">{{ sec.cta_supporting_copy }}</p>
-        </div>
-        <a href="{{ sec.cta_button_url }}" class="cta-banner-button p-2">
-            {{ sec.cta_button_text }}
-        </a>
-    </div>
+    {% case section.settings.cta_alignment %}
+        {% when 'left_align' or 'right_align' %}
+            {% assign alignment_type = 'flex-row justify-between px-4' %}
+            <div class="xl:max-w-screen-xl mx-auto flex py-4 flex-row justify-between px-4">
+                {% comment %}
+                    Left Alignment
+                {% endcomment %}
+                {%- if section.settings.cta_alignment == 'left_align' -%}
+                    <div class="cta-banner-copy mb-4">   
+                        <h3 class="text-3xl">{{ sec.cta_header }}</h3>
+                        <p class="text-2xl">{{ sec.cta_supporting_copy }}</p>
+                    </div>
+                    <a href="{{ sec.cta_button_url }}" class="cta-banner-button p-2">
+                        {{ sec.cta_button_text }}
+                    </a>
+                {%- endif -%}
+                {% comment %}
+                    Right Alignment
+                {% endcomment %}
+                {%- if section.settings.cta_alignment == 'right_align' -%}
+                    <a href="{{ sec.cta_button_url }}" class="cta-banner-button p-2">
+                        {{ sec.cta_button_text }}
+                    </a>
+                    <div class="cta-banner-copy mb-4">   
+                        <h3 class="text-3xl">{{ sec.cta_header }}</h3>
+                        <p class="text-2xl">{{ sec.cta_supporting_copy }}</p>
+                    </div>
+                {%- endif -%}    
+            </div>
+        {% when 'stacked' %}
+            {% comment %}
+                Stacked
+            {% endcomment %}
+            <div class="xl:max-w-screen-xl mx-auto flex py-4 flex-col items-center">
+                <div class="cta-banner-copy mb-4">   
+                    <h3 class="text-3xl">{{ sec.cta_header }}</h3>
+                    <p class="text-2xl">{{ sec.cta_supporting_copy }}</p>
+                </div>
+                <a href="{{ sec.cta_button_url }}" class="cta-banner-button p-2">
+                    {{ sec.cta_button_text }}
+                </a> 
+            </div>
+    {% endcase %}
 </section>
 
 {% schema %}
@@ -36,6 +76,26 @@
             "default": "This is a Call to Action",
             "info": "This is where you enter copy for this sections title",
             "placeholder": "This is a Call to Action"
+        },
+        {
+            "type": "select",
+            "id": "cta_alignment",
+            "label": "CTA Alignment",
+            "options": [
+                {
+                    "value": "stacked",
+                    "label": "Stacked"
+                },
+                {
+                    "value": "left_align",
+                    "label": "Align Left"
+                },
+                {
+                    "value": "right_align",
+                    "label": "Align Right"
+                }
+            ],
+            "default": "stacked"
         },
         {
             "type": "textarea",

@@ -1,0 +1,66 @@
+{%- case section.settings.collection_column_amount -%}
+    {%- when 'two' -%}
+        {%- assign column_amount = 'grid gap-6 md:grid-cols-2 grid-cols-1' -%}
+    {%- when 'three' -%}
+        {%- assign column_amount = 'grid gap-6 md:grid-cols-3 grid-cols-1' -%}
+    {%- when 'four' -%}
+        {%- assign column_amount = 'grid gap-6 md:grid-cols-4 grid-cols-1' -%}
+{%- endcase -%}
+
+
+{% paginate collection.products by 12 %}
+  <div class="py-2 max-w-5xl m-auto pt-8">
+    <h1 class="pb-8">{{ collection.title }}</h1>
+    <div class="{{ column_amount }}">
+        {% for product in collection.products %}
+            <div class="bg-white shadow-md rounded-md overflow-hidden">
+                <a href="{{ product.url | within: collection }}" class="pt-4 px-4 block">
+                    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+                </a>    
+                <div class="py-2 text-center">
+                    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+                    <p class="pb-2">{{ product.price | money }}</p>
+                </div>
+                {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+            </div>
+        {% else %}
+            <p>no matches</p>
+        {% endfor %}
+    </div>
+    {% if paginate.pages > 1 %}
+        {{ paginate | default_pagination }}
+    {% endif %}
+  </div>
+{% endpaginate %}
+{% schema %}
+{
+    "name": "Collection",
+    "settings": [
+        {
+            "type": "text",
+            "id": "test",
+            "label": "test"
+        },
+        {
+            "type": "select",
+            "id": "collection_column_amount",
+            "label": "Column Amount",
+            "options": [
+                {
+                    "value": "two",
+                    "label": "Two"
+                },
+                {
+                    "value": "three",
+                    "label": "Three"
+                },
+                {
+                    "value": "four",
+                    "label": "Four"
+                }
+            ],
+            "default": "two"
+        }
+    ]
+}
+{% endschema %}
