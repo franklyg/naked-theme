@@ -1,46 +1,60 @@
-{% if cart.item_count > 0 %}
-  <h1>cart</h1>
+<div class="max-w-5xl pt-8 m-auto">
+  {% if cart.item_count > 0 %}
+  <h1 class="pb-8 text-6xl mb-8 text-gray-700">cart</h1>
   <form action="/cart" method="post" novalidate>
-    <table>
-      <thead>
-        <th colspan="2">Prod</th>
-        <th>Price</th>
-        <th>Qty</th>
-        <th>total</th>
-      </thead>
-      <tbody>
+    <div>
+      <div class="grid grid-cols-5 gap-8 mb-8">
+        <div class="col-span-2">
+          <h3 class="text-1xl">Prod</h3>
+        </div>
+        <div>
+          <h3 class="text-1xl">Price</h3>
+        </div>
+        <div>
+          <h3 class="text-1xl">Qty</h3>
+        </div>
+        <div>
+          <h3 class="text-1xl">total</h3>
+        </div>
+      </div>
+      <div>
         {% for item in cart.items %}
-          <tr>
-            <td>
-              <a href="{{ item.url | within: collections.all }}">
-                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+          <div class="grid grid-cols-5 gap-8 border-b border-gray-200 mb-8 pb-8 items-center">
+            <div class="grid grid-cols-2 gap-x-8 col-span-2 items-center">
+              <a href="{{ item.url | within: collections.all }}" class="shadow-2xl block my-2">
+                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}" />
               </a>
-            </td>
-            <td>
-              <a href="{{ item.url }}">{{ item.product.title }}</a>
-              {{ item.variant.title }}
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-            </td>
-            <td>{{ item.price | money }}</td>
-            <td>
-              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-            </td>
-            <td>
+              <div>
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                <p>{{ item.variant.title }}</p>
+                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="my-4 inline-block py-1 px-2 rounded-md shadow-md bg-gray-200 cursor-pointer">remove</a>
+              </div>
+            </div>
+            <div>{{ item.price | money }}</div>
+            <div>
+              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="bg-white shadow-md rounded-md p-2 block w-full" />
+            </div>
+            <div class="text-right">
               {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
               {{ item.line_price | money }}
               {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-            </td>
-          </tr>
+            </div>
+          </div>
         {% endfor %}
-      </tbody>
-    </table>
-    <div>
-      <p>sub total : {{ cart.total_price | money }}</p>
-      <button type="submit" name="update">Update</button>
-      <button type="submit" name="checkout">Checkout</button>
+        </div>
+    </div>
+    <div class="grid col-span-1 gap-8 border-b border-gray-200 mb-8 pb-8 text-right">
+      <div>
+        <p>sub total : {{ cart.total_price | money }}</p>
+      </div>
+    </div>
+    <div class="grid col-span-5 grid-cols-5 gap-x-8">
+      <button type="submit" name="update" class="my-4 py-4 px-8 rounded-md shadow-md bg-gray-200 cursor-pointer">Update</button>
+      <button type="submit" name="checkout" class="my-4 py-4 px-8 rounded-md shadow-md bg-gray-200 cursor-pointer">Checkout</button>
     </div>
   </form>
-{% else %}
-  <h2>cart</h2>
-  Cart is empty
-{% endif %}
+  {% else %}
+    <h2>cart</h2>
+    Cart is empty
+  {% endif %}
+</div>

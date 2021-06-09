@@ -1,0 +1,11 @@
+<div class="py-4">
+    <div class="grid grid-cols-3 gap-6">
+        {%- for blog in blog.articles -%}
+            <div>
+                <img src="{{ blog.image | | img_url: 'master' }}" alt="{{ blog.image.alt }}" />
+                <h3>{{ blog.title }}</h3>
+                <p>{{ article.content | strip_html | truncatewords: 100  }}</p>
+            </div>
+        {%- endfor -%}
+    </div>
+</div>

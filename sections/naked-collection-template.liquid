@@ -10,7 +10,7 @@
 
 {% paginate collection.products by 12 %}
   <div class="py-2 max-w-5xl m-auto pt-8">
-    <h1 class="pb-8">{{ collection.title }}</h1>
+    <h1 class="text-6xl pb-8">{{ collection.title }}</h1>
     <div class="{{ column_amount }}">
         {% for product in collection.products %}
             <div class="bg-white shadow-md rounded-md overflow-hidden">

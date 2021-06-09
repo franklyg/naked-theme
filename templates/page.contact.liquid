@@ -1,14 +1,30 @@
-<h1>{{ page.title }}</h1>
-{% form 'contact' %}
-  {% if form.posted_successfully? %} Thank you for your contact {% endif %}
-  {{ form.errors | default_errors }}
-  <label for="ContactFormName">name</label>
-  <input type="text" id="ContactFormName" name="contact[name]">
-  <label for="ContactFormEmail">email</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]">
-  <label for="ContactFormPhone">phone</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]">
-  <label for="ContactFormMessage">message</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-  <input type="submit" value="send">
-{% endform %}
+<div class="max-w-5xl m-auto pt-8">
+  <h1 class="text-6xl pb-8">{{ page.title }}</h1>
+  {% form 'contact' %}
+    <div class="bg-white shadow-md my-4 p-4 w-full">
+      {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+      {{ form.errors | default_errors }}
+      <div class="fields grid grid-cols-2 gap-x-4">
+        <div class="my-2">
+          <label for="ContactFormName" class="block mb-2">name</label>
+          <input type="text" id="ContactFormName" name="contact[name]" class="bg-gray-100 p-3 w-full">
+        </div>
+        <div class="my-2">
+          <label for="ContactFormEmail" class="block mb-2">email</label>
+          <input type="email" id="ContactFormEmail" name="contact[email]" class="bg-gray-100 p-3 w-full">
+        </div>
+        <div class="my-2">
+          <label for="ContactFormPhone" class="block mb-2">phone</label>
+          <input type="tel" id="ContactFormPhone" name="contact[phone]" class="bg-gray-100 p-3 w-full">  
+        </div>
+      </div>
+      <div>
+        <div class="my-2">
+          <label for="ContactFormMessage mb-2">message</label>
+          <textarea rows="10" id="ContactFormMessage" name="contact[body]" class="bg-gray-100 w-full p-3"></textarea>
+        </div>
+      </div>
+      <input type="submit" value="send" class="my-4 py-4 px-8 rounded-md shadow-md bg-gray-200 cursor-pointer">
+    </div>
+  {% endform %}
+</div>
